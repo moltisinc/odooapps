@@ -17,6 +17,7 @@
         "views/template.xml",
         "views/action_view.xml",
     ],
+    "images": ["static/description/banner.png"],
     "license": "GPL-3",
     "application": True,
     "installable": True,

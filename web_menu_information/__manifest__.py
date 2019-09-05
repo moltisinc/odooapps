@@ -12,6 +12,7 @@
     "description": """
         Web Menu Information
     """,
+    "images": ["static/description/banner.png"],
     "depends": ["base", "web"],
     "data": [
         "views/template.xml",
