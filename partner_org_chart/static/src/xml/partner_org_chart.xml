@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<t t-name="res_org_chart_partner">
+    <div t-attf-class="o_org_chart_entry o_org_chart_entry_#{partner_type} media">
+        <t t-set="is_self" t-value="partner_type == 'self'"/>
+
+        <div class="media-left">
+            <a t-if="! is_self"
+                class="media-object img-circle o_partner_redirect"
+                t-att-style="'background-image:url(\'/web/image/res.partner/' + partner.id + '/image/\')'"
+                t-att-alt="partner.name"
+                t-att-data-partner-id="partner.id"
+                t-att-href="partner.link"/>
+            <div t-if="is_self"
+                class="media-object img-circle"
+                t-att-style="'background-image:url(\'/web/image/res.partner/' + partner.id + '/image/\')'"/>
+        </div>
+
+        <div class="media-body">
+            <span
+                    t-if="partner.indirect_sub_count &gt; 0"
+                    class="badge"
+                    tabindex="0"
+                    data-trigger="focus"
+                    t-att-data-partner-name="partner.name"
+                    t-att-data-partner-id="partner.id"
+                    t-att-data-partner-dir-subs="partner.direct_sub_count"
+                    t-att-data-partner-ind-subs="partner.indirect_sub_count"
+                    data-toggle="popover">
+                <t t-esc="partner.indirect_sub_count"/>
+            </span>
+
+            <t t-if="!is_self">
+                <a t-att-href="partner.link" class="o_partner_redirect" t-att-data-partner-id="partner.id">
+                    <h5 class="media-heading"><b><t t-esc="partner.name"/></b></h5>
+                </a>
+            </t>
+            <t t-if="is_self">
+                <h5 class="media-heading"><b><t t-esc="partner.name"/></b></h5>
+            </t>
+        </div>
+    </div>
+</t>
+
+<t t-name="partner_org_chart">
+
+    <t t-set="partner_count" t-value="0"/>
+
+    <div t-if='managers.length &gt; 0' class="o_org_chart_group_up">
+        <t t-if='managers_more'>
+            <div class="o_org_chart_entry o_org_chart_more media">
+                <div class="media-left">
+                    <a class="well media-object text-center o_partner_redirect"
+                            t-att-href="managers[0].link"
+                            t-att-data-partner-id="managers[0].id">
+                        <i t-attf-class="fa fa-angle-double-up"/>
+                    </a>
+                </div>
+            </div>
+        </t>
+
+        <t t-foreach="managers" t-as="partner">
+            <t t-set="partner_count" t-value="partner_count + 1"/>
+            <t t-call="res_org_chart_partner">
+                <t t-set="partner_type" t-value="'manager'"/>
+            </t>
+        </t>
+    </div>
+
+    <t t-if="children.length || managers.length" t-call="res_org_chart_partner">
+        <t t-set="partner_type" t-value="'self'"/>
+        <t t-set="partner" t-value="self"/>
+    </t>
+
+    <t t-if="!children.length &amp;&amp; !managers.length">
+        <div class="alert alert-info">
+            <p><b>No hierarchy position.</b></p>
+            <p>This partner has no subordinate.</p>
+        </div>
+    </t>
+
+    <div t-if="children.length" class="o_org_chart_group_down">
+        <t t-foreach="children" t-as="partner">
+            <t t-set="partner_count" t-value="partner_count + 1"/>
+            <t t-if="partner_count &lt; 8">
+                <t t-call="res_org_chart_partner">
+                    <t t-set="partner_type" t-value="'sub'"/>
+                </t>
+            </t>
+        </t>
+
+        <t t-if="(children.length + managers.length) &gt; 7">
+            <div class="o_org_chart_entry o_org_chart_more media">
+                <div class="media-left">
+                    <a href="#"
+                        t-att-data-partner-id="self.id"
+                        t-att-data-partner-name="self.name"
+                        class="well o_org_chart_show_more media-object text-center o_partner_sub_redirect">&#8230;</a>
+                </div>
+            </div>
+        </t>
+    </div>
+</t>
+
+<t t-name="res_orgchart_partner_popover">
+    <div class="popover o_org_chart_popup" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>
+</t>
+
+<t t-name="res_orgchart_partner_popover_content">
+    <table class="table table-condensed">
+        <thead>
+            <td class="text-right"><t t-esc="partner.direct_sub_count"/></td>
+            <td>
+                <a href="#" class="o_partner_sub_redirect" data-type='direct'
+                        t-att-data-partner-name="partner.name" t-att-data-partner-id="partner.id">
+                    <b>Direct subordinates</b></a>
+            </td>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-right">
+                    <t t-esc="partner.indirect_sub_count - partner.direct_sub_count"/>
+                </td>
+                <td>
+                    <a href="#" class="o_partner_sub_redirect" data-type='indirect'
+                            t-att-data-partner-name="partner.name" t-att-data-partner-id="partner.id">
+                        Indirect subordinates</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right"><t t-esc="partner.indirect_sub_count"/></td>
+                <td>
+                    <a href="#" class="o_partner_sub_redirect" data-type='total'
+                            t-att-data-partner-name="partner.name" t-att-data-partner-id="partner.id">
+                        Total</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</t>
+
+<t t-name="res_orgchart_partner_popover_title">
+    <div>
+        <span t-att-style='"background-image:url(\"/web/image/res.partner/" + partner.id + "/image/\")"'/>
+        <a href="#" class="pull-right o_partner_redirect" t-att-data-partner-id="partner.id"><i class="fa fa-external-link"></i></a>
+        <b><t t-esc="partner.name"/></b>
+    </div>
+</t>
+
+</templates>

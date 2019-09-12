@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_view_form_inherit_org_chart" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.org.chart</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <field name="child_ids" position="replace">
+                <group>
+                    <div id="o_partner_right">
+                        <h4 class="o_org_chart_title mb16 mt0">Contact Chart</h4>
+                        <field name="child_ids" widget="partner_org_chart" context="{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_supplier': supplier, 'default_customer': customer, 'default_lang': lang,}"/>
+                    </div>
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>
