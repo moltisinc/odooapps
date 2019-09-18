@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Every Email Send to a Company BCC(Blank carbon copy)',
-    "version": "11.0.0.1",
+    "version": "12.0.0.1",
     'category': 'Email',
     'summary': 'Send email to a company in BCC(Blank carbon copy)',
     'description': """
