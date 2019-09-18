@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="tree_slider" xml:space="preserve">
+    <t t-name="FormView.TreeSlider">
+        <div>
+            <input type="checkbox" id="slide" name="" value="" />
+            <div class="container">
+                <label for="slide" class="toggle" data-whois="toggle">  <span class="glyphicon">&amp;nbsp;</span></label>
+                <nav class="sidebar">
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-structure text-center">
+                                    <t t-esc="widget.state.fields[node.children[0].attrs.name].string"></t>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                    <div id="ontTree"></div>
+                </nav>
+            </div>
+        </div>
+    </t>
+    <t t-name="FieldOne2ManyTree">
+        <div>
+            <div id="One2ManyTree"></div>
+        </div>
+    </t>
+    <div t-name="FieldOne2ManyTree.TreeItems"
+        t-foreach="fields" t-as="field"
+        t-att-data-id="field.id"
+        class="o_tree_structure_item"
+        tabindex="-1">
+        <span t-if="field.children"
+              class="o_expand_parent fa fa-plus" style="float: left;"/>
+        <t t-if="!field.children">
+            <i class="fa fa-square" style="float: left; margin-left: -15px;"></i>
+        </t>
+        <span class="o_tree_column" t-att-title="debug and field.id or None">
+            
+            <t t-esc="field.string"/>
+        </span>
+    </div>
+</templates>

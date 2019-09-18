@@ -1,0 +1,230 @@
+@import url(https://fonts.googleapis.com/css?family=Poiret+One|Varela+Round);
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('/product_tree_widget/static/src/fonts/glyphicons-halflings-regular.eot');
+    src: url('/product_tree_widget/static/src/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/product_tree_widget/static/src/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/product_tree_widget/static/src/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/product_tree_widget/static/src/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+.toggle {
+    color: rgba(0, 0, 0, 0.61);
+    position: absolute;
+    background-color: #f9f9f9;
+    top: 40%;
+    left: 0px;
+    z-index: 1;
+    cursor: pointer;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: 2px solid #fff;
+    -webkit-box-shadow: 2px 0px 8px rgba(0, 0, 0, .175);
+    box-shadow: 2px 0px 8px rgba(0, 0, 0, .175);
+}
+
+.sidebar {
+    position: absolute;
+    top: 112px;
+    bottom: 0px;
+    left: -190px;
+    -webkit-transition: all 0.15s ease-out 0;
+    -moz-transition: all 0.15s ease-out 0;
+    transition: all 0.15s ease-out 0;
+    width: 18rem;
+    background-color: #f9f9f9;
+    z-index: 1000;
+    border-right: 1px;
+    border-right-color: #c6c6c6;
+    border-right-style: solid;
+}
+
+.toggle > span {
+    margin: 25px 0px;
+    padding-left: 10px;
+}
+
+.container .toggle .glyphicon:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e250";
+}
+
+.list-group-item{
+    padding: 7px 2px !important;
+}
+
+.sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar li a {
+    color: #000;
+    font-family: 'Poiret One', cursive;
+    font-size: 15px;
+    margin: 0;
+    margin-bottom: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 200%;
+}
+
+.sidebar a:hover {
+    color: #fff;
+    color: #000;
+}
+
+#slide:checked + .container .toggle .glyphicon:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e251";
+}
+
+#slide:checked + .container .toggle {
+    left: 17.78rem;
+    background-color: #8a89b6;
+    color: white;
+}
+
+#slide:checked + .container .sidebar {
+    left: 0px;
+}
+
+#slide {
+    display: none; 
+}
+
+@media (max-width:490px)  {
+
+    .sidebar
+    {
+        display: none;
+    }
+    .toggle{
+        display: none;
+    }
+
+}
+@media (min-width:491px)  { 
+
+    .sidebar
+    {
+        top:0px;
+    }
+
+}
+
+@media (min-width:646px)  { 
+
+    .sidebar
+    {
+        top:0px;
+    }
+
+}
+
+@media (min-width:801px)  { 
+
+    .sidebar
+    {
+        top:0px;
+    }
+
+}
+
+@media (min-width:1025px) { 
+
+    .sidebar
+    {
+        top:0px;
+    }
+
+}
+
+@media (min-width:1281px) { 
+
+    .sidebar
+    {
+        top:0px;
+    }
+
+}
+
+.o_tree_structure_item{
+    cursor: pointer;
+    position: relative;
+    padding-left: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left: 25px;
+    margin-top: 2px;
+}
+
+.o_field_tree_structure > div .o_tree_structure_item {
+    cursor: pointer;
+    position: relative;
+    padding-left: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left: 2px;
+    margin-top: 2px;
+}
+.o_field_tree_structure > div .o_tree_structure_item .o_expand_parent {
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    bottom: auto;
+    right: auto;
+}
+.o_field_tree_structure > div .o_tree_structure_item.o_selected > .o_tree_column {
+    background-color: #7c7bad;
+    color: white;
+    margin: 2px;
+    border: 1px solid;
+    border-color: black;
+}
+
+.o_field_tree_structure > div .o_tree_structure_item .o_expand_parent {
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    bottom: auto;
+    right: auto;
+}
+
+.o_tree_column {
+    margin-left: 17px;
+    display: block;
+}
+
+.o_field_tree_structure >  div .o_tree_structure_item .o_tree_column.o_required {
+    border-bottom: 2px solid #4c4c4c;
+}
+
+div .o_tree_structure_item.o_selected > .o_tree_column {
+    background-color: #7c7bad;
+    color: white;
+}
+
+div .o_fields_list {
+    border: 1px solid #e2e2e0;
+    overflow: auto;
+    -ms-flex: 1 1 auto;
+    -moz-flex: 1 1 auto;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+.navbar-structure{
+    float: left;
+    padding: 3px 15px;
+    font-size: 17px;
+    height: auto;
+}

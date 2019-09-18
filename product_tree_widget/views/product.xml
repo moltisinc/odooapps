@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="product assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/product_tree_widget/static/src/css/base.css"/>
+            <link rel="stylesheet" href="/product_tree_widget/static/src/css/bootstrap-treeview.css"/>
+            <script type="text/javascript" src="/product_tree_widget/static/src/js/tree_widget.js"></script>
+            <script type="text/javascript" src="/product_tree_widget/static/src/js/bootstrap-treeview.js"></script>
+        </xpath>
+    </template>
+</odoo>
