@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Users Limits",
-    'summary': """
+    "name": "Users Limits",
+    "summary": """
         This Module set user creation limit.""",
-    'description': """
+    "description": """
         This Module set user creation limit.
     """,
     "author": "Moltis Technologies",
     "website": "www.moltis.net",
     "support": "info@moltis.net",
-    'category': 'Tools',
+    "category": "Tools",
     "version": "11.0.0.1",
-    'depends': ['base'],
-    'data': [],
+    "depends": ["base"],
+    "images": ["static/description/banner.png"],
+    "data": [],
     "application": True,
     "installable": True,
     "auto_install": False,
-    'license': 'AGPL-3',
+    "license": "AGPL-3",
 }
