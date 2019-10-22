@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="web_screenshot.screenshot_menu">
+        <li class="o_mail_navbar_item">
+            <a class="screenshot-toggle" href="#" title="Screenshot">
+                <i class="fa fa-camera"/></a>
+        </li>
+    </t>
+</templates>
