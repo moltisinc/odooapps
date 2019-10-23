@@ -8,6 +8,9 @@ class Partner(models.Model):
     child_all_count = fields.Integer(
         'Indirect Surbordinates Count',
         compute='_compute_child_all_count', store=False)
+    child_org_ids = fields.One2many("res.partner", related="child_ids")
+
+
 
     @api.depends('child_ids.child_all_count')
     def _compute_child_all_count(self):
