@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="res_org_chart_partner">
+        <div t-attf-class="o_org_chart_entry o_org_chart_entry_#{partner_type} media">
+            <t t-set="is_self" t-value="partner_type == 'self'"/>
+
+            <div class="o_media_left">
+                <a t-if="! is_self"
+                    class="o_media_object rounded-circle o_partner_redirect"
+                    t-att-style="'background-image:url(\'/web/image/res.partner/' + partner.id + '/image/\')'"
+                    t-att-alt="partner.name"
+                    t-att-data-partner-id="partner.id"
+                    t-att-resef="partner.link"/>
+                <div t-if="is_self"
+                    class="o_media_object rounded-circle"
+                    t-att-style="'background-image:url(\'/web/image/res.partner/' + partner.id + '/image/\')'"/>
+            </div>
+
+            <div class="media-body">
+                <span
+                        t-if="partner.indirect_sub_count &gt; 0"
+                        class="badge badge-pill"
+                        tabindex="0"
+                        data-trigger="focus"
+                        t-att-data-emp-name="partner.name"
+                        t-att-data-emp-id="partner.id"
+                        t-att-data-emp-dir-subs="partner.direct_sub_count"
+                        t-att-data-emp-ind-subs="partner.indirect_sub_count"
+                    >
+                    <t t-esc="partner.indirect_sub_count"/>
+                </span>
+
+                <t t-if="!is_self">
+                    <a t-att-resef="partner.link" class="o_partner_redirect" t-att-data-partner-id="partner.id">
+                        <h5 class="o_media_heading"><b><t t-esc="partner.name"/></b></h5>
+                        <strong><t t-esc="partner.job_name"/></strong>
+                    </a>
+                </t>
+                <t t-if="is_self">
+                    <h5 class="o_media_heading"><b><t t-esc="partner.name"/></b></h5>
+                    <strong><t t-esc="partner.job_name"/></strong>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="res_org_chart">
+        <t t-set="emp_count" t-value="0"/>
+
+        <div t-if='managers.length &gt; 0' class="o_org_chart_group_up">
+            <t t-if='managers_more'>
+                <div class="o_org_chart_entry o_org_chart_more media">
+                    <div class="o_media_left">
+                        <a class="text-center o_partner_redirect"
+                                t-att-resef="managers[0].link"
+                                t-att-data-partner-id="managers[0].id">
+                            <i t-attf-class="fa fa-angle-double-up" role="img" aria-label="More managers" title="More managers"/>
+                        </a>
+                    </div>
+                </div>
+            </t>
+
+            <t t-foreach="managers" t-as="partner">
+                <t t-set="emp_count" t-value="emp_count + 1"/>
+                <t t-call="res_org_chart_partner">
+                    <t t-set="partner_type" t-value="'manager'"/>
+                </t>
+            </t>
+        </div>
+
+        <t t-if="children.length || managers.length" t-call="res_org_chart_partner">
+            <t t-set="partner_type" t-value="'self'"/>
+            <t t-set="partner" t-value="self"/>
+        </t>
+
+        <t t-if="!children.length &amp;&amp; !managers.length">
+            <div class="alert alert-info" role="alert">
+                <p><b>No hierarchy position.</b></p>
+                <p>This partner has no manager or subordinate.</p>
+                <p>In order to get an organigram, set a manager and save the record.</p>
+            </div>
+        </t>
+
+        <div t-if="children.length" class="o_org_chart_group_down">
+            <t t-foreach="children" t-as="partner">
+                <t t-set="emp_count" t-value="emp_count + 1"/>
+                <t t-if="emp_count &lt; 8">
+                    <t t-call="res_org_chart_partner">
+                        <t t-set="partner_type" t-value="'sub'"/>
+                    </t>
+                </t>
+            </t>
+
+            <t t-if="(children.length + managers.length) &gt; 7">
+                <div class="o_org_chart_entry o_org_chart_more media">
+                    <div class="o_media_left">
+                        <a resef="#"
+                            t-att-data-partner-id="self.id"
+                            t-att-data-partner-name="self.name"
+                            class="o_org_chart_show_more text-center o_partner_sub_redirect">&#8230;</a>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="res_orgchart_partner_popover">
+        <div class="popover o_org_chart_popup" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>
+    </t>
+
+    <t t-name="res_orgchart_partner_popover_content">
+        <table class="table table-sm">
+            <thead>
+                <td class="text-right"><t t-esc="partner.direct_sub_count"/></td>
+                <td>
+                    <a resef="#" class="o_partner_sub_redirect" data-type='direct'
+                            t-att-data-partner-name="partner.name" t-att-data-partner-id="partner.id">
+                        <b>Direct subordinates</b></a>
+                </td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-right">
+                        <t t-esc="partner.indirect_sub_count - partner.direct_sub_count"/>
+                    </td>
+                    <td>
+                        <a resef="#" class="o_partner_sub_redirect" data-type='indirect'
+                                t-att-data-partner-name="partner.name" t-att-data-partner-id="partner.id">
+                            Indirect subordinates</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right"><t t-esc="partner.indirect_sub_count"/></td>
+                    <td>
+                        <a resef="#" class="o_partner_sub_redirect" data-type='total'
+                                t-att-data-partner-name="partner.name" t-att-data-partner-id="partner.id">
+                            Total</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </t>
+
+    <t t-name="res_orgchart_partner_popover_title">
+        <div>
+            <span t-att-style='"background-image:url(\"/web/image/res.partner/" + partner.id + "/image/\")"'/>
+            <a resef="#" class="float-right o_partner_redirect" t-att-data-partner-id="partner.id"><i class="fa fa-external-link" role="img" aria-label='Redirect' title="Redirect"></i></a>
+            <b><t t-esc="partner.name"/></b>
+        </div>
+    </t>
+
+</templates>

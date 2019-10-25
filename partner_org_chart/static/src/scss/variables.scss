@@ -1,0 +1,14 @@
+$o-contact-org-chart-bg: white !default;
+$o-contact-org-chart-border-color: $o-brand-secondary !default;
+
+$o-contact-org-chart-entry-v-gap: 6px !default;
+$o-contact-org-chart-entry-pic-size: 46px !default;
+$o-contact-org-chart-entry-line-w: 1px !default;
+$o-contact-org-chart-entry-border-color: darken($o-contact-org-chart-bg, 25%) !default;
+
+// MIXINS
+@mixin o-contact-org-chart-line {
+    content: '';
+    background-color: $o-contact-org-chart-bg;
+    border: 0px solid $o-contact-org-chart-entry-border-color;
+}
