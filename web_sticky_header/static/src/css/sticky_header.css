@@ -1,0 +1,10 @@
+.o_form_view .o_form_statusbar {
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_buttons 
+{
+    float: left;
+}
