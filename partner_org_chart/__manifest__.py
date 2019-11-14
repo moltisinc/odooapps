@@ -8,7 +8,7 @@
     "website": "www.moltis.net",
     "support": "info@moltis.net",
     "category": "Tools",
-    "version": "11.0.0.1",
+    "version": "13.0.0.1",
     "data": [
         "views/partner_templates.xml",
         "views/partner_views.xml"

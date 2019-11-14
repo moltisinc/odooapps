@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Web Screenshot",
-    "version": "11.0.0.1",
+    "version": "13.0.0.1",
     "category": "Extra Tools",
     "summary": "Web Screenshot",
     "author": "Moltis Technologies",

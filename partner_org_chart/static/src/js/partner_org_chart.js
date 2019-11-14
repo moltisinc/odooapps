@@ -1,4 +1,4 @@
-odoo.define('web.PartnerOrgChart', function (require) {
+odoo.define('web.PartnerOrgChart1', function (require) {
 "use strict";
 
 var AbstractField = require('web.AbstractField');
@@ -60,7 +60,7 @@ var PartnerOrgChart = AbstractField.extend({
 
         var self = this;
         return this._getOrgData(this.recordData.id).then(function () {
-            self.$el.html(QWeb.render("partner_org_chart", self.orgData));
+            self.$el.html(QWeb.render("res_org_chart", self.orgData));
             self.$('[data-toggle="popover"]').each(function () {
                 $(this).popover({
                     html: true,

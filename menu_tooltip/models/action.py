@@ -54,4 +54,5 @@ class IrUiMenu(models.Model):
             menu_item.setdefault('children', []).sort(key=operator.itemgetter('sequence'))
 
         (menu_roots + menus)._set_menuitems_xmlids(menu_root)
+
         return menu_root

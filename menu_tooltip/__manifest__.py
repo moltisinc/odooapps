@@ -11,11 +11,14 @@
     "website": "www.moltis.net",
     "support": "info@moltis.net",
     "category": "Tools",
-    "version": "11.0.0.1",
+    "version": "13.0.0.1",
     "depends": ["base", "web"],
     "data": [
-        "views/template.xml",
         "views/action_view.xml",
+        "views/template.xml",
+    ],
+    'qweb': [
+        "static/src/xml/menu.xml",
     ],
     "images": ["static/description/banner.png"],
     "license": "GPL-3",
