@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template">
+     <t t-name="web_debugger.debugger_menu">
+        <li class="o_mail_navbar_item">
+            <a class="oe_debugger_menu_mode"  title="Developer Mode with Assets" href="#">
+                <span class="fa fa-cogs"/>
+            </a>
+        </li>
+    </t>
+</templates>
