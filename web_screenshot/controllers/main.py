@@ -13,7 +13,7 @@ class Screenshot(http.Controller):
         attachment_id = request.env['ir.attachment'].sudo().create({
             'name': name,
             'datas': image,
-            'datas_fname': name,
+            #'datas_fname': name,
             'type': 'binary',
             'store_fname': name,
         })
